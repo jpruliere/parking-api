@@ -14,7 +14,7 @@ const db = new Client();
  */
 const findAll = async () => {
   await db.connect();
-  const { rows } = await db.query('SELECT * FROM parking;');
+  const { rows } = await db.query('SELECT id, name, pricing FROM parking;');
   await db.end();
   return rows;
 };
