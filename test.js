@@ -14,4 +14,7 @@ require('dotenv').config();
 
 const parking = require('./requests/parking');
 
-parking.findAll().then(console.table);
+// Youpi, ça marche
+//parking.findAll().then(console.table);
+
+parking.findByPricing('privé').then(console.table);

@@ -24,7 +24,12 @@ const findAll = async () => {
  * @param {string} pricing - Le type tarifaire sur lequel filtrer.
  * @returns {Array<Parking>} Les parkings de la db ayant cette tarification.
  */
-const findByPricing = (pricing) => {};
+const findByPricing = async (pricing) => {
+  await db.connect();
+  const { rows } = await db.query(`SELECT id, name, pricing FROM parking WHERE pricing = '${pricing}';`);
+  await db.end();
+  return rows;
+};
 
 module.exports = {
   findAll,
