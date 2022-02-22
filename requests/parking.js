@@ -28,7 +28,7 @@ const findAll = async () => {
  */
 const findByPricing = async (pricing) => {
   await db.connect();
-  const { rows } = await db.query(`SELECT id, name, pricing FROM parking WHERE pricing = '${pricing}';`);
+  const { rows } = await db.query(`SELECT id, name, pricing FROM parking WHERE pricing = $1;`, [pricing]);
   await db.end();
   return rows;
 };
@@ -43,7 +43,7 @@ const findByMinimumPlaces = async (nbPlaces) => {
   await db.connect();
   const { rows } = await db.query(`SELECT id, name, pricing, number_of_places
   FROM parking
-  WHERE number_of_places >= ${nbPlaces};`);
+  WHERE number_of_places >= $1;`, [nbPlaces]);
   await db.end();
   return rows;
 };
