@@ -1,5 +1,4 @@
-const { Pool } = require('pg');
-const db = new Pool();
+const db = require('./pool');
 
 /**
  * Un objet JS représentant un parking issu de la db
