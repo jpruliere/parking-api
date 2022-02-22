@@ -1,0 +1,20 @@
+{
+  "name": "parking-api",
+  "version": "1.0.0",
+  "description": "Une API pour interagir avec une db et gérer des parkings",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpruliere/parking-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jpruliere/parking-api/issues"
+  },
+  "homepage": "https://github.com/jpruliere/parking-api#readme"
+}
