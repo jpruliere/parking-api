@@ -1,6 +1,12 @@
 const { Client } = require('pg');
 const db = new Client();
 
+// plutôt que de connecter le client à chaque fois qu'on en a besoin
+// (ce qui, accessoirement, ne fonctionne pas car un client ne peut être connectée qu'une fois)
+// je le connecte dès que possible
+// et je n'attends pas qu'il soit connecté
+db.connect();
+
 /**
  * Un objet JS représentant un parking issu de la db
  * @typedef Parking
@@ -14,9 +20,7 @@ const db = new Client();
  * @returns {Array<Parking>} L'ensemble des parkings de la db.
  */
 const findAll = async () => {
-  await db.connect();
   const { rows } = await db.query('SELECT id, name, pricing FROM parking;');
-  await db.end();
   return rows;
 };
 
@@ -27,9 +31,7 @@ const findAll = async () => {
  * @returns {Array<Parking>} Les parkings de la db ayant cette tarification.
  */
 const findByPricing = async (pricing) => {
-  await db.connect();
   const { rows } = await db.query(`SELECT id, name, pricing FROM parking WHERE pricing = $1;`, [pricing]);
-  await db.end();
   return rows;
 };
 
@@ -40,13 +42,13 @@ const findByPricing = async (pricing) => {
  * @returns {Array<Parking>} Les parkings de la db ayant au moins ce nombre de places.
  */
 const findByMinimumPlaces = async (nbPlaces) => {
-  await db.connect();
   const { rows } = await db.query(`SELECT id, name, pricing, number_of_places
   FROM parking
   WHERE number_of_places >= $1;`, [nbPlaces]);
-  await db.end();
   return rows;
 };
+
+// plus besoin de déconnecteur le client, ça se fera tout seul quand on fermera le programme Node
 
 module.exports = {
   findAll,

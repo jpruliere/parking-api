@@ -15,9 +15,13 @@ require('dotenv').config();
 const parking = require('./requests/parking');
 
 // Youpi, ça marche
-//parking.findAll().then(console.table);
+parking.findAll().then(console.table);
 
 // Youpi, ça marche
-//parking.findByPricing('privé').then(console.table);
+parking.findByPricing('gratuit').then(console.table);
 
+// Youpi, ça marche
 parking.findByMinimumPlaces(61).then(console.table);
+
+// grâce à notre petite modification du moment de la connection du client
+// on peut maintenant appeler nos fonctions autant qu'on veut
