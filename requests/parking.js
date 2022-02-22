@@ -10,6 +10,7 @@ const db = new Client();
 
 /**
  * Va chercher les parkings dans la db et les retourne sous forme d'objets
+ * @async
  * @returns {Array<Parking>} L'ensemble des parkings de la db.
  */
 const findAll = async () => {
@@ -21,6 +22,7 @@ const findAll = async () => {
 
 /**
  * Va chercher les parkings ayant une tarification spécifique, fournie en argument
+ * @async
  * @param {string} pricing - Le type tarifaire sur lequel filtrer.
  * @returns {Array<Parking>} Les parkings de la db ayant cette tarification.
  */
@@ -31,10 +33,23 @@ const findByPricing = async (pricing) => {
   return rows;
 };
 
-// retourner les parkings ayant au moins nbPlaces
-const findByMinimumPlaces = async (nbPlaces) => {};
+/**
+ * Va chercher les parkings ayant au moins un certain nombre de places, fourni en argument
+ * @async
+ * @param {number} nbPlaces - Le nombre minimum de places souhaité.
+ * @returns {Array<Parking>} Les parkings de la db ayant au moins ce nombre de places.
+ */
+const findByMinimumPlaces = async (nbPlaces) => {
+  await db.connect();
+  const { rows } = await db.query(`SELECT id, name, pricing, number_of_places
+  FROM parking
+  WHERE number_of_places >= ${nbPlaces};`);
+  await db.end();
+  return rows;
+};
 
 module.exports = {
   findAll,
-  findByPricing
+  findByPricing,
+  findByMinimumPlaces
 };

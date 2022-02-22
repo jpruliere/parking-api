@@ -20,4 +20,4 @@ const parking = require('./requests/parking');
 // Youpi, ça marche
 //parking.findByPricing('privé').then(console.table);
 
-parking.findByMinimumPlaces(30).then(console.table);
+parking.findByMinimumPlaces(61).then(console.table);
