@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/jpruliere/parking-api/issues"
   },
-  "homepage": "https://github.com/jpruliere/parking-api#readme"
+  "homepage": "https://github.com/jpruliere/parking-api#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "pg": "^8.7.3"
+  }
 }

@@ -1,3 +1,6 @@
+const { Client } = require('pg');
+const db = new Client();
+
 /**
  * Un objet JS représentant un parking issu de la db
  * @typedef Parking
@@ -9,7 +12,12 @@
  * Va chercher les parkings dans la db et les retourne sous forme d'objets
  * @returns {Array<Parking>} L'ensemble des parkings de la db.
  */
-const findAll = () => {};
+const findAll = async () => {
+  await db.connect();
+  const { rows } = await db.query('SELECT * FROM parking;');
+  await db.end();
+  return rows;
+};
 
 /**
  * Va chercher les parkings ayant une tarification spécifique, fournie en argument
