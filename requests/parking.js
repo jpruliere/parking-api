@@ -31,6 +31,9 @@ const findByPricing = async (pricing) => {
   return rows;
 };
 
+// retourner les parkings ayant au moins nbPlaces
+const findByMinimumPlaces = async (nbPlaces) => {};
+
 module.exports = {
   findAll,
   findByPricing

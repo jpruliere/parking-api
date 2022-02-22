@@ -17,4 +17,7 @@ const parking = require('./requests/parking');
 // Youpi, ça marche
 //parking.findAll().then(console.table);
 
-parking.findByPricing('privé').then(console.table);
+// Youpi, ça marche
+//parking.findByPricing('privé').then(console.table);
+
+parking.findByMinimumPlaces(30).then(console.table);
