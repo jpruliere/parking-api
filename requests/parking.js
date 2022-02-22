@@ -1,11 +1,5 @@
-const { Client } = require('pg');
-const db = new Client();
-
-// plutôt que de connecter le client à chaque fois qu'on en a besoin
-// (ce qui, accessoirement, ne fonctionne pas car un client ne peut être connectée qu'une fois)
-// je le connecte dès que possible
-// et je n'attends pas qu'il soit connecté
-db.connect();
+const { Pool } = require('pg');
+const db = new Pool();
 
 /**
  * Un objet JS représentant un parking issu de la db
