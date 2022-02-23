@@ -1,30 +1,21 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-
 const port = 9900;
 
-// REST
-// les verbes HTTP ont un rôle
-// GET : récupérer des données, lecture
-// POST : insérer des données, écriture
-// PUT : modifier des données, écriture
-// PATCH : modifier des données, écriture
-// DELETE : supprimer des données, écriture
-
-// les endpoints désignent ce qu'ils concernent
-// GET /parkings doit retourner des parkings, pas des chantiers
-// DELETE /maintenances/14 doit servir à supprimer le chantier dont l'id est 14, pas à supprimer le véhicule dont l'id est 14
-
-// les noms des ressources sont au pluriel
-// /parkings et pas /parking
-// /visits et pas /visit
-
+// pour que notre serveur comprenne le JSON en tant que dialecte "entrant"
+// en effet, il sait nativement le parler avec res.json
+// mais il a besoin de cette config pour le comprendre quand on lui en envoie
+// et ainsi le rendre disponible dans req.body
 app.use(express.json());
 
-
+// cette technique d'un routeur par type de ressource,
+// on va pouvoir la reproduire pour les autres tables de la db
+// et l'index restera propre et net
 const parkingRouter = require('./routers/parking');
 
+// puisqu'avec REST, toutes les routes concernant les parkings commencent par /parkings,
+// autant le définir ici, ça nous évite de le répéter dans le routeur
 app.use('/parkings', parkingRouter);
 
 app.listen(port, () => console.log(`Server listening on port ${port}`));
