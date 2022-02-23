@@ -41,10 +41,20 @@ const findByMinimumPlaces = async (nbPlaces) => {
   return rows;
 };
 
+// TODO : JSDoc
+const computePlacesByPricing = async () => {
+  // TODO : commenter l'agrég
+  const { rows } = await db.query(`SELECT pricing, SUM(number_of_places)
+  FROM parking
+  GROUP BY pricing;`);
+  return rows;
+}
+
 // plus besoin de déconnecteur le client, ça se fera tout seul quand on fermera le programme Node
 
 module.exports = {
   findAll,
   findByPricing,
-  findByMinimumPlaces
+  findByMinimumPlaces,
+  computePlacesByPricing
 };

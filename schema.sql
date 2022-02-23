@@ -64,7 +64,7 @@ CREATE TABLE parking_vehicle (
   CONSTRAINT visit_time_consistency CHECK (exit_time IS NULL OR enter_time < exit_time)
 );
 
-INSERT INTO vehicle (license_plate) VALUES ('DZ-650-TQ', 'YA-776-AL', 'AD-310-YO');
+INSERT INTO vehicle (license_plate) VALUES ('DZ-650-TQ'), ('YA-776-AL'), ('AD-310-YO');
 
 INSERT INTO parking_vehicle (parking_id, vehicle_id, enter_time, exit_time) VALUES
 (1, 1, '2022-02-17 18:01:45', null),
