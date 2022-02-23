@@ -16,13 +16,13 @@ const parking = require('./requests/parking');
 const maintenance = require('./requests/maintenance');
 
 // Youpi, ça marche
-parking.findAll().then(console.table);
+//parking.findAll().then(console.table);
 
 // Youpi, ça marche
-parking.findByPricing('gratuit').then(console.table);
+//parking.findByPricing('gratuit').then(console.table);
 
 // Youpi, ça marche
-parking.findByMinimumPlaces(61).then(console.table);
+//parking.findByMinimumPlaces(61).then(console.table);
 
 // Youpi, ça marche
 maintenance.findCurrent().then(console.table);
