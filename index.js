@@ -20,11 +20,11 @@ const port = 9900;
 // /parkings et pas /parking
 // /visits et pas /visit
 
-const parking = require('./requests/parking');
+app.use(express.json());
 
-app.get('/parkings', async (req, res) => {
-  const parkings = await parking.findAll();
-  res.json(parkings);
-})
+
+const parkingRouter = require('./routers/parking');
+
+app.use('/parkings', parkingRouter);
 
 app.listen(port, () => console.log(`Server listening on port ${port}`));

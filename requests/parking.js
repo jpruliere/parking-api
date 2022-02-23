@@ -8,6 +8,14 @@ const db = require('./pool');
  */
 
 /**
+ * Un object JS représentant des données à insérer dans la table parking
+ * @typedef ParkingPayload
+ * @property {string} name - le nom du futur parking.
+ * @property {string} address - l'adresse de ce parking.
+ * 
+ */
+
+/**
  * Va chercher les parkings dans la db et les retourne sous forme d'objets
  * @async
  * @returns {Array<Parking>} L'ensemble des parkings de la db.
@@ -16,6 +24,16 @@ const findAll = async () => {
   const { rows } = await db.query('SELECT id, name, pricing FROM parking;');
   return rows;
 };
+
+/**
+ * Insère un nouveau parking dans la db
+ * @async
+ * @param {ParkingPayload} newParking - le payload à insérer.
+ */
+const insert = async ({ name, address, numberOfPlaces, area, alwaysOpen, openingHour, closingHour }) => {
+  await db.query(`INSERT INTO parking (name, address, number_of_places, area, always_open, opening_hour, closing_hour) VALUES
+  ($1, $2, $3, $4, $5, $6, $7)`, [name, address, numberOfPlaces, area, alwaysOpen, openingHour, closingHour]);
+}
 
 /**
  * Va chercher les parkings ayant une tarification spécifique, fournie en argument
@@ -54,6 +72,7 @@ const computePlacesByPricing = async () => {
 
 module.exports = {
   findAll,
+  insert,
   findByPricing,
   findByMinimumPlaces,
   computePlacesByPricing
