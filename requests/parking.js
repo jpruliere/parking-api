@@ -26,6 +26,17 @@ const findAll = async () => {
 };
 
 /**
+ * Va chercher les parkings dans la db et les retourne sous forme d'objets
+ * @async
+ * @param {number} id - L'id recherché.
+ * @returns {Parking} Le parking correspondant.
+ */
+const findOne = async (id) => {
+  const { rows } = await db.query('SELECT * FROM parking WHERE id = $1;', [id]);
+  return rows[0];
+};
+
+/**
  * Insère un nouveau parking dans la db
  * @async
  * @param {ParkingPayload} newParking - le payload à insérer.
@@ -37,6 +48,29 @@ const insert = async ({ name, address, numberOfPlaces, area, alwaysOpen, opening
 
 const destroy = async (id) => {
   await db.query('DELETE FROM parking WHERE id = $1;', [id]);
+};
+
+const update = async ({ id, name, address, number_of_places, pricing, area, always_open, opening_hour, closing_hour }) => {
+  await db.query(`UPDATE parking
+  SET name = $1,
+  address = $2,
+  number_of_places = $3,
+  area = $4,
+  always_open = $5,
+  opening_hour = $6,
+  closing_hour = $7,
+  pricing = $8
+  WHERE id = $9;`, [
+    name,
+    address,
+    number_of_places,
+    area,
+    always_open,
+    opening_hour,
+    closing_hour,
+    pricing,
+    id
+  ]);
 }
 
 /**
@@ -76,8 +110,10 @@ const computePlacesByPricing = async () => {
 
 module.exports = {
   findAll,
+  findOne,
   insert,
   destroy,
+  update,
   findByPricing,
   findByMinimumPlaces,
   computePlacesByPricing

@@ -24,6 +24,20 @@ router.delete('/:parkingId', async (req, res) => {
   await parking.destroy(req.params.parkingId);
 
   res.json('OK');
+});
+
+router.put('/:parkingId', async (req, res) => {
+
+  const theParking = await parking.findOne(req.params.parkingId);
+
+  const payload = { ...theParking, ...req.body };
+
+  
+  console.log(payload);
+
+  parking.update(payload);
+
+  res.json('OK');
 })
 
 module.exports = router;
