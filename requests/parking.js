@@ -33,6 +33,10 @@ const findAll = async () => {
 const insert = async ({ name, address, numberOfPlaces, area, alwaysOpen, openingHour, closingHour }) => {
   await db.query(`INSERT INTO parking (name, address, number_of_places, area, always_open, opening_hour, closing_hour) VALUES
   ($1, $2, $3, $4, $5, $6, $7)`, [name, address, numberOfPlaces, area, alwaysOpen, openingHour, closingHour]);
+};
+
+const destroy = async (id) => {
+  await db.query('DELETE FROM parking WHERE id = $1;', [id]);
 }
 
 /**
@@ -73,6 +77,7 @@ const computePlacesByPricing = async () => {
 module.exports = {
   findAll,
   insert,
+  destroy,
   findByPricing,
   findByMinimumPlaces,
   computePlacesByPricing

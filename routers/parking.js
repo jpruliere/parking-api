@@ -18,6 +18,12 @@ router.post('/', async (req, res) => {
   await parking.insert(req.body);
 
   res.json('OK');
+});
+
+router.delete('/:parkingId', async (req, res) => {
+  await parking.destroy(req.params.parkingId);
+
+  res.json('OK');
 })
 
 module.exports = router;
